@@ -1,49 +1,50 @@
-from tkinter import *
+from tkinter import *  # Importing the necessary tkinter modules
 
-first_number=second_number=operator=None
+first_number = second_number = operator = None  # Initializing variables for storing numbers and operators
 
-def get_digit(digit):
+def get_digit(digit):  # Function to handle getting digits and updating the result label
     current = result_label['text']
     new = current + str(digit)
     result_label.config(text=new)
 
-def clear():
+def clear():  # Function to clear the result label
     result_label.config(text='')
 
-def get_operator(op):
-    global first_number,operator
+def get_operator(op):  # Function to handle getting operators and storing the first number
+    global first_number, operator
 
     first_number = int(result_label['text'])
     operator = op
     result_label.config(text='')
 
-def get_result():
-    global first_number,second_number,operator
+def get_result():  # Function to calculate and display the result based on the stored operator and second number
+    global first_number, second_number, operator
 
     second_number = int(result_label['text'])
 
-    if operator == '+':
-        result_label.config(text=str(first_number+second_number))
-    elif operator == '-':
+    if operator == '+':  # Addition
+        result_label.config(text=str(first_number + second_number))
+    elif operator == '-':  # Subtraction
         result_label.config(text=str(first_number - second_number))
-    elif operator == '*':
+    elif operator == '*':  # Multiplication
         result_label.config(text=str(first_number * second_number))
-    else:
+    else:  # Division
         if second_number == 0:
-            result_label.config(text='Error')
+            result_label.config(text='Error')  # Error for division by zero
         else:
-            result_label.config(text=str(round(first_number / second_number,2)))
+            result_label.config(text=str(round(first_number / second_number, 2)))
 
-root = Tk()
-root.title('Calculator')
-root.geometry('280x380')
-root.resizable(0,0)
-root.configure(background='black')
+root = Tk()  # Creating the main tkinter window
+root.title('Calculator')  # Setting the title
+root.geometry('280x380')  # Setting the initial window size
+root.resizable(0, 0)  # Making the window non-resizable
+root.configure(background='black')  # Setting the background color
 
-result_label = Label(root,text='',bg='black',fg='white')
-result_label.grid(row=0,column=0,columnspan=5,pady=(50,25),sticky='w')
-result_label.config(font=('verdana',30,'bold'))
+result_label = Label(root, text='', bg='black', fg='white')  # Creating a label for displaying the result
+result_label.grid(row=0, column=0, columnspan=5, pady=(50, 25), sticky='w')  # Placing the label on the window
+result_label.config(font=('verdana', 30, 'bold'))  # Configuring the label font
 
+# Creating buttons for digits, operators, and other functionalities, and configuring their appearance and behavior
 btn7 = Button(root,text='7',bg='#00a65a',fg='white',width=5,height=2,command=lambda :get_digit(7))
 btn7.grid(row=1,column=0)
 btn7.config(font=('verdana',14))
